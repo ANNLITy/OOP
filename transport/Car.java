@@ -1,11 +1,4 @@
-public class Car {
-    private final String brand;
-    private final String model;
-    private final double engineVolume;
-    private final String color;
-    private final int year;
-    private final String country;
-
+public class Car extends Transport {
     private String transmission;
 
     private final String body;
@@ -14,7 +7,17 @@ public class Car {
 
     private final int places;
 
-    private Boolean rubber;
+    public Car(String brand, String model, String color, int year, String country, int maxSpeed, double engineVolume, String body, int places, String transmission, int number, String rubber) {
+        super(brand, model, color, year, country, maxSpeed);
+
+        this.body = body;
+        this.places = places;
+        this.transmission=transmission;
+        this.number=number;
+        this.rubber=rubber;
+    }
+
+    private String rubber;
 
     public String getTransmission() {
         return transmission;
@@ -32,100 +35,68 @@ public class Car {
         return number;
     }
 
-    public Boolean getRubber() {
+    public String getRubber() {
         return rubber;
     }
 
-    public String getBrand() {
-        return brand;
-    }
 
     public void setTransmission(String transmission) {
-        this.transmission = transmission;
+        String Default = "АКПП";
+        if (transmission == null || transmission.equals("")) {
+            this.transmission = Default;
+        } else {
+            this.transmission = transmission;
+        }
     }
+
 
     public void setNumber(int number) {
         this.number = number;
     }
 
-    public void setRubber(Boolean rubber) {
+    public void setRubber(String rubber) {
         this.rubber = rubber;
     }
 
     @Override
     public String toString() {
         return "Car{" +
-                "brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", engineVolume=" + engineVolume +
-                ", color='" + color + '\'' +
-                ", year=" + year +
-                ", country='" + country + '\'' +
+                "brand='" + getBrand() + '\'' +
+                ", model='" + getModel() + '\'' +
+                ", color='" + getColor() + '\'' +
+                ", year=" + getYear() +
+                ", country='" + getCountry() + '\'' +
+                ", maxSpeed='" + getMaxSpeed()+'\''+
+                ", transmission='" + transmission + '\'' +
+                ", body='" + body + '\'' +
+                ", number=" + number + '\'' +
+                ", places=" + places + '\'' +
+                ", rubber=" + rubber + '\'' +
                 '}';
     }
 
 
-    public Car(String brand, String model, double engineVolume, String color, int year, String country) {
-        String Default = "default";
-        String DefaultColour = "Белый";
-        if (brand == null || brand.equals("")) {
-            this.brand = Default;
-        }else {
-            this.brand = brand;
-        }
-        if (model == null || model.equals("")) {
-            this.model = Default;
-        }else {
-            this.model = model;
-        }
-        if (engineVolume<=0){
-            this.engineVolume=1.5;
-        }else {
-            this.engineVolume = engineVolume;
-        }
-        if (color == null || color.equals("")) {
-            this.color = DefaultColour;
-        }else {
-            this.color = color;
-        }
-        if (year<=0){
-            this.year=2000;
-        }else {
-            this.year = year;
-        }
-        if (country == null || country.equals("")) {
-            this.country = Default;
-        }else {
-            this.country = country;
-        }
-        this.transmission="АКПП";
-        this.body="Седан";
-        this.number=555;
-        this.places=5;
-        this.rubber= Boolean.valueOf("Летняя" );
-
-
-        }
-public static class Key {
+    public static class Key {
         private final boolean remoteRunEngine;
         private final boolean withoutKeyAccess;
-        public Key(boolean remoteRunEngine, boolean withoutKeyAccess){
-            this.remoteRunEngine= remoteRunEngine;
-            this.withoutKeyAccess=withoutKeyAccess;
+
+        public Key(boolean remoteRunEngine, boolean withoutKeyAccess) {
+            this.remoteRunEngine = remoteRunEngine;
+            this.withoutKeyAccess = withoutKeyAccess;
         }
+
         public Key() {
-            this(false,false);
+            this(false, false);
         }
 
-    public boolean isRemoteRunEngine() {
-        return remoteRunEngine;
-    }
+        public boolean isRemoteRunEngine() {
+            return remoteRunEngine;
+        }
 
-    public boolean isWithoutKeyAccess() {
-        return withoutKeyAccess;
+        public boolean isWithoutKeyAccess() {
+            return withoutKeyAccess;
+        }
     }
 }
 
-
-    }
 
